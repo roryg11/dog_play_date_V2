@@ -11,93 +11,94 @@
     </div>
   </div>
 
-  <div class="ui form segment">
     <%= form_for @user, url: signup_path, html: {class: "ui form", id: "signup-form"} do |f| %>
-      <%= render 'shared/errors', object: @user %>
-
-      <div class="three fields">
-        <div class="field">
-          <%= f.label :first_name %>
-          <div class="field">
-            <%= f.text_field :first_name %>
-          </div>
-        </div>
-        <div class="field">
-          <%= f.label :last_name %>
-          <div class="field">
-            <%= f.text_field :last_name %>
-          </div>
-        </div>
-        <div class="field">
-          <%= f.label :email %>
-          <div class="field">
-            <%= f.text_field :email %>
-          </div>
-        </div>
+      <div class="ui error message">
+        <%= render 'shared/errors', object: @user %>
       </div>
+      <div class="ui form segment">
+        <div class="three fields">
+          <div class="field">
+            <%= f.label :first_name %>
+            <div class="field">
+              <%= f.text_field :first_name %>
+            </div>
+          </div>
+          <div class="field">
+            <%= f.label :last_name %>
+            <div class="field">
+              <%= f.text_field :last_name %>
+            </div>
+          </div>
+          <div class="field">
+            <%= f.label :email %>
+            <div class="field">
+              <%= f.text_field :email %>
+            </div>
+          </div>
+        </div>
 
-      <div class="three fields">
-        <div class="field">
-          <%= f.label :zipcode %>
+        <div class="three fields">
           <div class="field">
-            <%= f.number_field :zipcode %>
+            <%= f.label :zipcode %>
+            <div class="field">
+              <%= f.number_field :zipcode %>
+            </div>
           </div>
-        </div>
-        <div class="field">
-          <%= f.label :age %>
           <div class="field">
-            <%= f.number_field :age %>
+            <%= f.label :age %>
+            <div class="field">
+              <%= f.number_field :age %>
+            </div>
           </div>
-        </div>
-        <div class="field">
-          <label>Gender</label>
           <div class="field">
-            <div class="ui selection dropdown">
-              <div class="default text">Gender</div>
-              <i class="dropdown icon"></i>
-              <input id="new-gender" name="user[gender]" type="hidden">
-              <div class="menu">
-                <div class="item" data-value="Female">Female</div>
-                <div class="item" data-value="Male">Male</div>
+            <label>Gender</label>
+            <div class="field">
+              <div class="ui selection dropdown">
+                <div class="default text">Gender</div>
+                <i class="dropdown icon"></i>
+                <input id="new-gender" name="user[gender]" type="hidden">
+                <div class="menu">
+                  <div class="item" data-value="Female">Female</div>
+                  <div class="item" data-value="Male">Male</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="two fields">
-        <div class="field">
-          <%= f.label :bio %>
+        <div class="two fields">
           <div class="field">
-            <%= f.text_area :bio %>
+            <%= f.label :bio %>
+            <div class="field">
+              <%= f.text_area :bio %>
+            </div>
+          </div>
+          <div class="field">
+            <%= f.label "Upload Your Picture" %>
+            <div class="field">
+              <%= f.file_field :avatar %>
+            </div>
           </div>
         </div>
-        <div class="field">
-          <%= f.label "Upload Your Picture" %>
-          <div class="field">
-            <%= f.file_field :avatar %>
-          </div>
-        </div>
-      </div>
 
-      <div class="two fields">
-        <div class="field">
-          <%= f.label :password %>
+        <div class="two fields">
           <div class="field">
-            <%= f.password_field :password %>
+            <%= f.label :password %>
+            <div class="field">
+              <%= f.password_field :password %>
+            </div>
+          </div>
+          <div class="field">
+            <%= f.label :password_confirmation %>
+            <div class="field">
+              <%= f.password_field :password_confirmation %>
+            </div>
           </div>
         </div>
-        <div class="field">
-          <%= f.label :password_confirmation %>
-          <div class="field">
-            <%= f.password_field :password_confirmation %>
-          </div>
-        </div>
-      </div>
 
-      <div class="field">
-        <%= f.submit "Sign Up", id: "sign-up", class: "ui button" %>
+        <div class="field">
+          <%= f.submit "Sign Up", id: "sign-up", class: "ui button" %>
+        </div>
       </div>
     <% end %>
-  </div>
 </div>
