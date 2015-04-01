@@ -185,3 +185,29 @@
       </div>
   </div>
 </div>
+
+
+<script charset="utf-8" id="dog-modal" text="text/x-handlebars-template">
+<div class="ui modal">
+  <i class="close icon"></i>
+  <div class="header">{{name}}</div>
+  <div class="content">
+    <div class="ui medium circular image">
+      <img src ={{image}}>
+    </div>
+    <div class="description">
+      <h3>A Little Bit About Me</h3>
+      <p>{{bio}}</p>
+      <ul>
+        <li>Breed:{{breed}}</li>
+        <li>Gender: {{gender}}</li>
+        <li>Play Type:{{play}}</li>
+        <li>Personality Type: {{personality}}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui button">OK</div>
+  </div>
+</div>
+</script>

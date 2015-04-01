@@ -12,9 +12,7 @@
   </div>
 
     <%= form_for @user, url: signup_path, html: {class: "ui form", id: "signup-form"} do |f| %>
-      <div class="ui error message">
-        <%= render 'shared/errors', object: @user %>
-      </div>
+      <%= render 'shared/errors', object: @user %>
       <div class="ui form segment">
         <div class="three fields">
           <div class="field">

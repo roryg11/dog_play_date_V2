@@ -2,9 +2,8 @@
   <div class="five wide column">
     <div class="ui segment">
       <a class="ui ribbon label"><%= @user.full_name %></a>
-
       <div class="ui small circular image">
-        <img id="user_image" src=<%= @user.avatar %>>
+        <img id="user_image" src="<%= @user.avatar %>">
       </div>
 
       <div class="ui segment">
@@ -34,29 +33,8 @@
                 </div>
                 <%= image_tag(dog.avatar_url) %>
               </div>
-              <div class="content" data= "">
+              <div class="content dog" data-dog-id =<%= "#{dog.id}" %> >
                 <div class="header"><%= dog.name %></div>
-                <div class="meta">
-                  Adoring Human: <%= link_to dog.user.user_name, user_path(dog.user), class: "group" %>
-                </div>
-                <div class="description" data-dog-id=<%="#{dog.id}"%>><%= dog.bio %>...<span><strong>more</strong></span>
-                  <div class="inactive" id="more-info">
-                    <ul>
-                      <li><strong>Breed: </strong> <%= dog.breed %> </li>
-                      <li><strong>Age: </strong> <%= dog.age %></li>
-                      <li><strong>Gender: </strong><%= dog.gender %></li>
-                      <li><strong>Size: </strong><%= dog.size %></li>
-                      <li><strong>Play: </strong><%= dog.play %></li>
-                      <li><strong>Personality: </strong><%= dog.personality %></li>
-                    </ul>
-                  </div>
-                </div>
-
-              </div>
-              <div class="extra content">
-                <div class="ui avatar image">
-                  <%= image_tag(dog.user.avatar_url) %>
-                </div>
               </div>
             </div>
           <% end %>
@@ -71,3 +49,28 @@
     </div>
   </div>
 </div>
+
+<script charset="utf-8" id="dog-modal" text="text/x-handlebars-template">
+<div class="ui modal">
+  <i class="close icon"></i>
+  <div class="header">{{name}}</div>
+  <div class="content">
+    <div class="ui medium circular image">
+      <img src ={{image}}>
+    </div>
+    <div class="description">
+      <h3>A Little Bit About Me</h3>
+      <p>{{bio}}</p>
+      <ul>
+        <li>Breed:{{breed}}</li>
+        <li>Gender: {{gender}}</li>
+        <li>Play Type:{{play}}</li>
+        <li>Personality Type: {{personality}}</li>
+      </ul>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui button">OK</div>
+  </div>
+</div>
+</script>

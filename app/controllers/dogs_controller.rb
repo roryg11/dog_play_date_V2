@@ -74,6 +74,11 @@ class DogsController < ApplicationController
     flash[:notice] = "Dog successfully removed from your family"
   end
 
+  def show
+    @dog = Dog.find(params[:id])
+    render json: @dog
+  end
+
   private
     def dog_params
       params.require(:dog).permit(
