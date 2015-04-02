@@ -95,7 +95,7 @@ $(document).ready(function(){
       rules: [
       {
         type   : 'empty',
-        prompt : 'Please enter your name'
+        prompt : "Please enter your dog's name"
       }
       ]
     },

@@ -4,7 +4,9 @@
     <%= form_tag @user, url: signin_path do |f| %>
 
       <% if @sign_in_error %>
-        <%= @sign_in_error %>
+        <div class="ui error message">
+          <%= @sign_in_error %>
+        </div>
       <% end %>
       <div class="two fields">
         <div class="field">

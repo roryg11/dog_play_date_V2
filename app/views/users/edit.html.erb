@@ -1,74 +1,77 @@
-<div class="ui form segment">
-  <h1 class="ui header">Edit <%= @user.full_name %></h1>
-  <%= form_for @user, html: {class: "ui form", id: "edit-form"} do |f| %>
-    <%= render 'shared/errors', object: @user %>
-    <div class="three fields">
-      <div class="field">
-        <%= f.label :first_name %>
+<div class="page-body">
+  <div class="ui form segment">
+    <h1 class="ui header">Edit <%= @user.full_name %></h1>
+    <%= form_for @user, html: {class: "ui form", id: "edit-form"} do |f| %>
+      <%= render 'shared/errors', object: @user %>
+      <div class="three fields">
         <div class="field">
-          <%= f.text_field :first_name, id: "first-name-field" %>
+          <%= f.label :first_name %>
+          <div class="field">
+            <%= f.text_field :first_name, id: "first-name-field" %>
+          </div>
+        </div>
+        <div class="field">
+          <%= f.label :last_name %>
+          <div class="field">
+            <%= f.text_field :last_name %>
+          </div>
+        </div>
+        <div class="field">
+          <%= f.label :email %>
+          <div class="field">
+            <%= f.text_field :email %>
+          </div>
         </div>
       </div>
-      <div class="field">
-        <%= f.label :last_name %>
-        <div class="field">
-          <%= f.text_field :last_name %>
-        </div>
-      </div>
-      <div class="field">
-        <%= f.label :email %>
-        <div class="field">
-          <%= f.text_field :email %>
-        </div>
-      </div>
-    </div>
 
-    <div class="three fields">
-      <div class="field">
-        <%= f.label :zipcode %>
+      <div class="three fields">
         <div class="field">
-          <%= f.number_field :zipcode %>
+          <%= f.label :zipcode %>
+          <div class="field">
+            <%= f.number_field :zipcode %>
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <%= f.label :age %>
         <div class="field">
-          <%= f.number_field :age %>
+          <%= f.label :age %>
+          <div class="field">
+            <%= f.number_field :age %>
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <label>Gender</label>
         <div class="field">
-          <div class="ui selection dropdown">
-            <div class="default text">Gender</div>
-            <i class="dropdown icon"></i>
-            <input id="new-gender" name="user[gender]" type="hidden">
-            <div class="menu">
-              <div class="item" data-value="Female">Female</div>
-              <div class="item" data-value="Male">Male</div>
+          <label>Gender</label>
+          <div class="field">
+            <div class="ui selection dropdown">
+              <div class="default text">Gender</div>
+              <i class="dropdown icon"></i>
+              <input id="new-gender" name="user[gender]" type="hidden">
+              <div class="menu">
+                <div class="item" data-value="Female">Female</div>
+                <div class="item" data-value="Male">Male</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="two fields">
-      <div class="field">
-        <%= f.label :bio %>
+      <div class="two fields">
         <div class="field">
-          <%= f.text_area :bio %>
+          <%= f.label :bio %>
+          <div class="field">
+            <%= f.text_area :bio %>
+          </div>
+        </div>
+        <div class="field">
+          <%= f.label "Upload Your Picture" %>
+          <div class="field">
+            <%= f.file_field :avatar %>
+          </div>
         </div>
       </div>
-      <div class="field">
-        <%= f.label "Upload Your Picture" %>
-        <div class="field">
-          <%= f.file_field :avatar %>
-        </div>
-      </div>
-    </div>
 
-    <div class="field">
-      <%= f.submit "Update Profile", id: "update-user-action", class: "ui button" %>
-    </div>
-  <% end %>
+      <div class="field">
+        <%= f.submit "Update Profile", id: "update-user-action", class: "ui button" %>
+      </div>
+    <% end %>
+  </div>
+
 </div>
