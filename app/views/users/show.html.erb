@@ -1,4 +1,4 @@
-<div class="ui grid page-body">
+<div class="ui two column grid page-body">
   <div class="five wide column">
     <div class="ui segment">
       <a class="ui ribbon label"><%= @user.full_name %></a>
@@ -13,28 +13,28 @@
           <p><strong>Bio: </strong><%= @user.bio %></p>
         </div>
       </div>
+      <div class="ui segment extra content">
+        <i class="mail icon"></i><%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: @user.id), id: "message-user-#{@user.id}", method: 'post'%>
+      </div>
     </div>
   </div>
   <div class="eleven wide column">
     <div class="ui segment">
+      <div class="ui header center aligned">
+        <%= @user.user_name %>'s Dogs
+      </div>
+      <div class="horizontal divider"></div>
       <div class="ui three column padded page grid">
         <% @dogs.in_groups(3) do |column_dogs| %>
         <div class="column">
           <% column_dogs.each do |dog| %>
             <% break if dog.nil? %>
-            <div class="ui fluid card">
+            <div class="ui fluid card pop-out">
               <div class="image dimmable">
-                <div class="ui dimmer">
-                  <div class="content">
-                    <div class="center">
-                      <div class="ui inverted button">Add Friend</div>
-                    </div>
-                  </div>
-                </div>
                 <%= image_tag(dog.avatar_url) %>
               </div>
               <div class="content dog" data-dog-id =<%= "#{dog.id}" %> >
-                <div class="header"><%= dog.name %></div>
+                <div class="ui header center aligned"><%= dog.name %></div>
               </div>
             </div>
           <% end %>
@@ -53,7 +53,7 @@
 <script charset="utf-8" id="dog-modal" text="text/x-handlebars-template">
 <div class="ui modal">
   <i class="close icon"></i>
-  <div class="header">{{name}}</div>
+  <div class="ui center aligned header">{{name}}</div>
   <div class="content">
     <div class="ui medium circular image">
       <img src ={{image}}>

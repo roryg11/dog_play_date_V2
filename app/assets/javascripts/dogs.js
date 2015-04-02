@@ -1,5 +1,6 @@
 $(document).ready(function(){
-  $('.fluid').on('click', function(){
+  $('.content.info').on('click', function(){
+    console.log($(this).find('.description').data('dog-id'))
     var div = $(this).find('#more-info');
     var span = $(this).find('span');
     div.fadeIn().toggleClass('inactive');
@@ -11,7 +12,7 @@ $(document).ready(function(){
       }
   });
 
-  $('.card').on('click', function(){
+  $('.card.pop-out').on('click', function(){
     var dogId = $(this).find('.content.dog').data('dog-id');
     console.log(dogId);
     var imagePath = $(this).find('img')[0].src;

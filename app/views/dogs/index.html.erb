@@ -84,7 +84,7 @@
     <div class="column">
       <% column_dogs.each do |dog| %>
         <% break if dog.nil? %>
-        <div class="ui fluid card">
+        <div class="ui fluid index card">
           <div class="image dimmable">
             <div class="ui dimmer">
               <div class="content">
@@ -95,10 +95,10 @@
             </div>
             <%= image_tag(dog.avatar_url) %>
           </div>
-          <div class="content" data= "">
+          <div class="content info" data= "">
             <div class="header"><%= dog.name %></div>
             <div class="meta">
-              Adoring Human: <%= link_to dog.user.user_name, user_path(dog.user), class: "group" %>
+              Adoring Human: <%= dog.user.user_name %>
             </div>
             <div class="description" data-dog-id=<%="#{dog.id}"%>><%= dog.bio %>...<span><strong>more</strong></span>
               <div class="inactive" id="more-info">
@@ -119,7 +119,7 @@
               <%= image_tag(dog.user.avatar_url) %>
             </div>
             <% if current_user %>
-              <%= dog.user.user_name  %> <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: dog.user.id), method: 'post'%>
+              <%= link_to dog.user.user_name, user_path(dog.user) %> <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: dog.user.id), method: 'post'%>
             <% end %>
           </div>
         </div>

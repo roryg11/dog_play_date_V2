@@ -27,9 +27,9 @@
       <div class="column">
         <% column_dogs.each do |dog| %>
         <% break if dog.nil? %>
-        <div class="ui card field">
-          <div class="content">
-            <div class="header" data-dog-id ="<%= dog.id %>">
+        <div class="ui card field pop-out">
+          <div class="content dog" data-dog-id ="<%= dog.id %>">
+            <div class="header">
               <div class="ui avatar image">
                 <img id="dog_image" src=<%= dog.avatar %>>
               </div>
@@ -59,18 +59,11 @@
         <div class="ui three column grid">
           <% @dogs[0..2].each do |dog| %>
             <div class="column">
-              <div class="ui fluid card">
+              <div class="ui fluid pop-out card">
                 <div class="image dimmable">
-                  <div class="ui dimmer">
-                    <div class="content">
-                      <div class="center">
-                        <div class="ui inverted button">Add Friend</div>
-                      </div>
-                    </div>
-                  </div>
                   <%= image_tag(dog.avatar_url) %>
                 </div>
-                <div class="content" data= "">
+                <div class="content dog" data-dog-id="<%= dog.id %>">
                   <div class="header"><%= dog.name %></div>
                   <div class="meta">
                     Adoring Human: <%= link_to dog.user.user_name, user_path(dog.user), class: "group" %>
@@ -170,8 +163,8 @@
               <div class="content">
                 <div class="header"><%= link_to recipient.user_name, conversation_messages_path(conversation), class: "header" %></div>
                 <% if conversation.messages.last %>
-                <% if conversation.messages.last.body.length > 60 %>
-                <div class="description"> <%= conversation.messages.last.body[0..59] %>... </div>
+                <% if conversation.messages.last.body.length > 40 %>
+                <div class="description"> <%= conversation.messages.last.body[0..40] %>... </div>
                 <% else %>
                 <div class="description"> <%= conversation.messages.last.body %> </div>
                 <% end %>
