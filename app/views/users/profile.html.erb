@@ -148,8 +148,8 @@
         <h2 class="ui header">
           <div class="content">
             <div class="sub header medium">Paws-itive messages from your furry friends!
-              <% if current_user.unread_messages_count(current_user.id) > 0 %>
-                <div class="ui green label"> <%= current_user.unread_messages_count(current_user.id) %></div>
+              <% if current_user.unread_messages_count > 0 %>
+                <div class="ui green label"> <%= current_user.unread_messages_count %></div>
               <% end %>
             </div>
           </div>

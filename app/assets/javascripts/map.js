@@ -1,13 +1,13 @@
 $(document).ready(function(){
   var dogParksCollection = [];
   $.ajax({
-      type: "get",
-      url: 'https://apricot-crisp-1097.herokuapp.com/geojson',
-      dataType:"json",
-    }).done(function(results) {
-      dogParksCollection = results[0];
-      buildmap();
-    });
+    type: "get",
+    url: 'https://apricot-crisp-1097.herokuapp.com/geojson',
+    dataType:"json",
+  }).done(function(results) {
+    dogParksCollection = results[0];
+    buildmap();
+  });
   function buildmap(){
     L.mapbox.accessToken = 'pk.eyJ1IjoiZGF5eW51aGhoIiwiYSI6IlNrUWlXd0kifQ.PkwjuKO6Clksu2OGIoePeA';
     $( "#mapbox_map" ).load(mapBox());
@@ -20,6 +20,9 @@ $(document).ready(function(){
     var otherlong = $('#mapbox_map')[0].dataset.otherlongitude;
     var map = L.mapbox.map('mapbox_map', 'examples.map-i86nkdio').setView([latitude, longitude], 13);
 
+    map.on('ready', function(){
+      $('#mapbox_map .active').removeClass('active');
+    });
     var featureArray = [];
 
     featureArray.push({
@@ -51,5 +54,7 @@ $(document).ready(function(){
     map.fitBounds(usersLocations.getBounds());
 
     var dogParksLayer = L.mapbox.featureLayer().setGeoJSON(dogParksCollection).addTo(map);
+
+
   }
 });
