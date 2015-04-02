@@ -1,3 +1,4 @@
+require 'pry'
 class User < ActiveRecord::Base
   has_secure_password
   has_many :dogs
@@ -25,9 +26,9 @@ class User < ActiveRecord::Base
 
   def unread_messages_count
     @unread_messages = []
+    conversations =  Conversation.where("(conversations.sender_id = ? ) OR (conversations.recipient_id =?)", id, id)
     conversations.each do |conversation|
       conversation.messages.each do |message|
-
         if id != message.user_id
           if message.read == false
             @unread_messages << message
@@ -40,6 +41,8 @@ class User < ActiveRecord::Base
 
   def last_unread_message_conversation
     @unread_messages = []
+    conversations =  Conversation.where("(conversations.sender_id = ? ) OR (conversations.recipient_id =?)", id, id)
+
     conversations.each do |conversation|
       conversation.messages.each do |message|
 
@@ -53,6 +56,12 @@ class User < ActiveRecord::Base
     Conversation.find(@unread_messages.last.conversation_id)
   end
 
+  def last_active_conversation
+    @last_messages = []
+    conversations =  Conversation.where("(conversations.sender_id = ? ) OR (conversations.recipient_id =?)", id, id)
+    conversations = conversations.sort{ |a,b| b.updated_at <=> a.updated_at }
+    latest_conversation = conversations.last
+  end
 
 
   def blocked_users_info

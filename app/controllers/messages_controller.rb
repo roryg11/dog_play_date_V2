@@ -64,10 +64,12 @@ class MessagesController < ApplicationController
       @over_ten = false
       @messages = @conversation.messages
     end
-    if @messages.last
-      if @messages.last.user_id != current_user.id
-        @messages.last.read = true
-        @messages.last.save
+    if @messages != []
+      @messages.each do |message|
+        if message.user_id != current_user.id
+          message.read = true
+          message.save
+        end
       end
     end
   end
