@@ -23,20 +23,37 @@ class User < ActiveRecord::Base
   end
 
 
-  def unread_messages_count(user_id)
-    count = 0
+  def unread_messages_count
+    @unread_messages = []
     conversations.each do |conversation|
       conversation.messages.each do |message|
 
-        if user_id != message.user_id
+        if id != message.user_id
           if message.read == false
-            count += 1
+            @unread_messages << message
           end
         end
       end
     end
-    count
+    @unread_messages.length
   end
+
+  def last_unread_message_conversation
+    @unread_messages = []
+    conversations.each do |conversation|
+      conversation.messages.each do |message|
+
+        if id != message.user_id
+          if message.read == false
+            @unread_messages << message
+          end
+        end
+      end
+    end
+    Conversation.find(@unread_messages.last.conversation_id)
+  end
+
+
 
   def blocked_users_info
     blocked_user_info = []

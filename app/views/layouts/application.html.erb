@@ -18,8 +18,8 @@
       <% profile_page = is_active?(profile_path) %>
         <%= link_to current_user.full_name, profile_path, class: "ui item #{profile_page}", id:"#{current_user.first_name}-profile-path" %>
       <% conversation_page = is_active?(conversations_path) %>
-        <% if current_user.unread_messages_count(current_user.id) > 0 %>
-          <div class="ui red label"><%= current_user.unread_messages_count(current_user.id) %></div>
+        <% if current_user.unread_messages_count > 0 %>
+          <div class="ui red label"><%= link_to current_user.unread_messages_count, conversation_messages_path(current_user.last_unread_message_conversation) %></div>
         <% end %>
 
       <% search_page = is_active?(dogs_path) %>
