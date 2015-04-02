@@ -76,6 +76,7 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.7)
     execjs (2.3.0)
+    geocoder (1.2.8)
     hike (1.2.3)
     http_parser.rb (0.6.0)
     i18n (0.7.0)
@@ -192,6 +193,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   dotenv-rails
   em-websocket
+  geocoder
   jbuilder (~> 2.0)
   jquery-rails
   launchy

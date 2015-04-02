@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
    resources :dogs
 
+   get '/parks/index' => 'parks#index'
+   get '/parks/geojson' => 'parks#geojson', as: 'geojson'
+
    get '/signup' => 'registration#new', as: :signup
    post '/signup' => 'registration#create'
    get '/signin' => 'authentication#new', as: :signin
