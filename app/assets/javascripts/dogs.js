@@ -1,12 +1,11 @@
 $(document).ready(function(){
   $('.fluid').on('click', function(){
-    console.log("YOU CLICKED FOR MORE");
     var div = $(this).find('#more-info');
     var span = $(this).find('span');
     div.fadeIn().toggleClass('inactive');
     if(div.hasClass('inactive')){
       span.text('more');
-      div.fadeOut().toggleClass('inactive');
+      div.fadeOut().addClass('inactive');
     }else{
       span.text('less');
       }
