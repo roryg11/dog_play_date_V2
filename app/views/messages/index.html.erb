@@ -122,12 +122,12 @@
   function onErrors(msg){
     $("#chat-log .error").text( msg);
     setTimeout(function() {
-      console.log("setimeout");
       $( "#chat-log .error" ).text("");
     }, 3000);
 
   }
   function socketHealth(msg){
+    console.log(msg);
   }
 
   function connect() {

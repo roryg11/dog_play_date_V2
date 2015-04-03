@@ -1,6 +1,4 @@
 $(document).ready(function(){
-
-  console.log('in .ready');
   L.mapbox.accessToken = 'pk.eyJ1IjoiZGF5eW51aGhoIiwiYSI6IlNrUWlXd0kifQ.PkwjuKO6Clksu2OGIoePeA';
   var map = L.mapbox.map('mapbox_map', 'dayynuhhh.lkhpm9lc');
   map.on('ready', function(){
@@ -51,9 +49,7 @@ $(document).ready(function(){
       url: '/parks/geojson',
       dataType:"json",
     }).done(function(results) {
-      console.log("ajax call done");
       dogParksCollection = results[0];
-      console.log(dogParksCollection);
       L.mapbox.featureLayer().setGeoJSON(dogParksCollection).addTo(map);
     });
   }
