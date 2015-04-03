@@ -1,4 +1,5 @@
 Eye.application 'dog_play_date' do
+  puts File.expand_path(File.join(File.dirname(__FILE__), '..'))
   working_dir File.expand_path(File.join(File.dirname(__FILE__), '..'))
   stdall 'logs/trash.log' # stdout,err logs for processes by default
   env 'APP_ENV' => 'production' # global env for each processes
