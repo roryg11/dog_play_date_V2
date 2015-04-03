@@ -1,5 +1,6 @@
 class Filter < ActiveRecord::Base
   belongs_to :user
+  validates :content, presence: true
 
   def filter(_)
     raise 'Abstract Method'

@@ -36,6 +36,8 @@ group :development, :test do
   gem 'pry'
   gem 'better_errors'
   gem 'binding_of_caller'
+  # gem "capybara-webkit"
+  gem 'selenium-webdriver'
 end
 
 # Use ActiveModel has_secure_password

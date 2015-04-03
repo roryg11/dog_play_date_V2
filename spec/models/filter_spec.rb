@@ -319,4 +319,123 @@ describe Filter, :type => :model do
     expect(emma.filters.where(type: "Gender").length).to eq(1)
     expect(gender_filter_2.valid?).to eq(false)
   end
+
+  it "validates that a user can only have up to four personality filters" do
+    emma = User.create!(
+      first_name: "Emma",
+      last_name: "Stone",
+      email: "Emma@stone.com",
+      zipcode: 94118,
+      password: "12345678"
+    )
+
+    personality_filter = Filter.create!(
+      type: "Personality",
+      content: "Laid-Back",
+      user_id: emma.id
+    )
+
+    personality_filter_2 = Filter.create!(
+      type: "Personality",
+      content: "Shy-Timid",
+      user_id: emma.id
+    )
+
+    personality_filter_3 = Filter.create!(
+      type: "Personality",
+      content: "Adaptable",
+      user_id: emma.id
+    )
+
+    personality_filter_4 = Filter.create!(
+      type: "Personality",
+      content: "Confident",
+      user_id: emma.id
+    )
+
+    personality_filter_5 = Filter.create(
+      type: "Personality",
+      content: "Independent",
+      user_id: emma.id
+    )
+
+
+    expect(emma.filters.where(type: "Personality").length).to eq(4)
+    expect(personality_filter_5.valid?).to eq(false)
+  end
+  it "filters through personality inclusively" do
+    emma = User.create!(
+      first_name: "Emma",
+      last_name: "Stone",
+      email: "Emma@stone.com",
+      zipcode: 94118,
+      password: "12345678"
+    )
+
+    personality_filter = Filter.create!(
+      type: "Personality",
+      content: "Laid-Back",
+      user_id: emma.id
+    )
+
+    personality_filter_2 = Filter.create!(
+      type: "Personality",
+      content: "Adaptable",
+      user_id: emma.id
+    )
+
+    andrew = User.create!(
+      first_name: "Andrew",
+      last_name: "Garfield",
+      email: "Andrew@Garfield.com",
+      zipcode: 94123,
+      password: "12345678"
+    )
+
+    puddle = Dog.create!(
+      name: "puddle",
+      breed: "shar pei",
+      age: "4",
+      size: "Small",
+      play: "Fetch",
+      gender: "Female",
+      personality: "Laid-Back",
+      user_id: andrew.id,
+      zipcode: andrew.zipcode
+    )
+
+    lucky = Dog.create!(
+      name: "lucky",
+      breed: "french bull dog",
+      age: "4",
+      size: "Small",
+      play: "Chase",
+      gender: "Female",
+      personality: "Adaptable",
+      user_id: andrew.id,
+      zipcode: andrew.zipcode
+    )
+
+    raisin = Dog.create!(
+      name: "raisin",
+      breed: "french bull dog",
+      age: "4",
+      size: "Small",
+      play: "Chase",
+      gender: "Female",
+      personality: "Confident",
+      user_id: andrew.id,
+      zipcode: andrew.zipcode
+    )
+
+    dogs = Dog.all
+    emma.filters.each do |filter|
+      dogs = filter.filter(dogs)
+    end
+
+    dogs = dogs.map {|dog| dog.name}
+
+    expect(dogs).to eq(["puddle", "lucky"])
+    expect(dogs).not_to eq(["raisin"])
+  end
 end

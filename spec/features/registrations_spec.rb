@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature "Sign-Up" do
+feature "Sign-Up", js: true do
   scenario "User signs up" do
     visit root_path
     click_on "top-signup-button"

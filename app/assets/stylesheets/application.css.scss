@@ -80,14 +80,60 @@
 #inbox{
   margin: 20px;
 }
+
+a:hover, .button:hover {
+  color: $primary-green !important;
+  text-decoration: none;
+}
+
 .deep-navy-background {
   background: $deep-navy !important;
+  color: $light-gray !important;
+}
+
+.primary-green-button {
+  background: $primary-green !important;
+  color: $deep-navy !important;
+}
+
+.primary-green-button:hover {
+  background: $primary-green !important;
+  color: $light-gray !important;
+}
+
+.inverted.button.primary-green {
   color: $primary-green !important;
+  box-shadow: 0px 0px 0px 2px $primary-green inset !important;
+}
+
+.inverted.button.primary-green:hover {
+  color: #FFFFFF !important;
+  box-shadow: 0px 0px 0px 2px $primary-green inset !important;
+  background-color: $primary-green !important;
+}
+
+.inverted.button.deep-navy {
+  color: $deep-navy !important;
+  box-shadow: 0px 0px 0px 2px $deep-navy inset !important;
+}
+
+.inverted.button.dark-gray {
+  color: $dark-gray !important;
+  box-shadow: 0px 0px 0px 2px $dark-gray inset !important;
+}
+
+.compact.inverted.button.red {
+  color: red !important;
+}
+
+.compact.inverted.button.red:hover {
+  color: #FFFFFF !important;
 }
 
 .header-button {
   margin: 2em 0em 0em 40em !important;
   position: relative;
+  color: $primary-green !important;
 }
 
 .header-text {

@@ -45,25 +45,6 @@ $(document).ready(function(){
       }
       ]
     },
-    gender: {
-      identifier  : 'user[gender]',
-      rules: [
-      {
-        type   : 'empty',
-        prompt : 'Please select a gender'
-      }
-      ]
-    },
-
-    age: {
-      identifier  : 'user[age]',
-      rules: [
-      {
-        type   : 'integer',
-        prompt : 'Please enter your age'
-      }
-      ]
-    },
 
     password: {
       identifier : 'user[password]',
@@ -83,7 +64,7 @@ $(document).ready(function(){
       rules: [
       {
         type   : 'match[user[password]]',
-        prompt : 'Passwords do not match'
+        prompt : "Password confirmation doesn't match Password"
       }
       ]
     }

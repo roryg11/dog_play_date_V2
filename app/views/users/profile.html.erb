@@ -16,10 +16,7 @@
           <p><strong>Bio: </strong><%= current_user.bio %></p>
         </div>
       </div>
-
-      <div class="ui button">
-        <%= link_to "Edit", edit_user_path(current_user), id: "edit-user-action" %>
-      </div>
+      <%= link_to "Edit", edit_user_path(current_user), id: "edit-user-action", class: "ui inverted primary-green button" %>
     </div>
     <div class="ui segment">
       <a class="ui ribbon label">Your Dogs</a>
@@ -41,17 +38,16 @@
             </div>
           </div>
           <div class="ui bottom attached segment">
-            <%= link_to "Edit", edit_dog_path(dog), id:"edit-dog-#{dog.id}-action", class: "ui teal button" %>
+            <%= link_to "Edit", edit_dog_path(dog), id:"edit-dog-#{dog.id}-action", class: "ui inverted primary-green button" %>
             <%= link_to 'Delete Dog', dog_path(dog), method: :delete, data: {confirm: "Are you sure?"}, id:"delete-dog-#{dog.id}-action", class: "ui button" %>
           </div>
           <% end %>
           <div class ="one wide field"></div>
         </div>
         <% end %>
-        <%= link_to "Add Dog", new_dog_path, id: "add-dog-action", class: "ui button teal"  %>
+        <%= link_to "Add Dog", new_dog_path, id: "add-dog-action", class: "ui button primary-green-button" %>
       </div>
     </div>
-  </div>
   </div>
   <div class="eleven wide column">
     <div class="ui segment">
@@ -132,9 +128,7 @@
             </tbody>
           </table>
         </div>
-        <div class="ui button">
-          <%= link_to "Change Preferences", preferences_path, id:"preferences-link" %>
-        </div>
+        <%= link_to "Change Preferences", preferences_path, id:"preferences-link", class: "ui button primary-green-button" %>
       </div>
     </div>
       <div class="ui segment">
@@ -159,7 +153,7 @@
             <% end %>
             <div class="item">
               <%= link_to 'Block User', filters_path(:filter => {type: "BlockedUser", content:"#{recipient.id}"}), method: 'post', id: "block-user-#{recipient.id}-action", class: "ui right floated ui button compact inverted red"%>
-              <%= link_to 'See Conversation', conversation_messages_path(conversation), class: "right floated compact ui button", id: "see-conversation-#{conversation.id}" %>
+              <%= link_to 'See Conversation', conversation_messages_path(conversation), class: "ui button primary-green-button right floated compact", id: "see-conversation-#{conversation.id}" %>
               <%= image_tag recipient.avatar, class: "ui avatar image " %>
               <div class="content">
                 <div class="header"><%= link_to recipient.user_name, conversation_messages_path(conversation), class: "header" %></div>
