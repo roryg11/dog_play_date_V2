@@ -1,5 +1,12 @@
-<%= form_for @filter, as: :filter, url: { controller: 'filters', action: 'update', id: @filter.id } do |f| %>
-  <%= f.label :content %>
-  <%= f.text_field :content, id: "content-field" %>
-  <%= f.submit "Update #{@filter.type} Preferences", id: "update-action" %>
-<% end %>
+<div class="ui form segment">
+  <%= form_for @filter, as: :filter, url: { controller: 'filters', action: 'update', id: @filter.id } do |f| %>
+    <div class="field">
+      <label>Zipcode Change</label>
+      <input id="new-filter-type" name="filter[type]" type="hidden" value="Zipcode">
+      <%= f.text_field :content, id: "content-field" %>
+    </div>
+    <div class="field">
+      <%= f.submit "Update #{@filter.type} Preferences", id: "update-action", class: "ui button" %>
+    </div>
+  <% end %>
+</div>

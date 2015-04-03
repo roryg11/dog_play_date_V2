@@ -12,7 +12,7 @@ class FiltersController < ApplicationController
   def create
     @filter = current_user.filters.new(filter_params)
     if @filter.save
-      flash[:alert]= "Your Preferences have been saved"
+      flash[:notice]= "Your Preferences have been saved"
     else
       flash[:alert]="Your preference could not be saved"
     end

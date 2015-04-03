@@ -25,27 +25,27 @@ class User < ActiveRecord::Base
 
 
   def unread_messages_count
-    @unread_messages = []
-    conversations =  Conversation.where("(conversations.sender_id = ? ) OR (conversations.recipient_id =?)", id, id)
-    conversations.each do |conversation|
-      conversation.messages.each do |message|
-        if id != message.user_id
-          if message.read == false
-            @unread_messages << message
+    if conversations.exists?
+      @unread_messages = []
+      conversations =  Conversation.where("(conversations.sender_id = ? ) OR (conversations.recipient_id =?)", id, id)
+      conversations.each do |conversation|
+        conversation.messages.each do |message|
+          if id != message.user_id
+            if message.read == false
+              @unread_messages << message
+            end
           end
         end
       end
+      @unread_messages.length
     end
-    @unread_messages.length
   end
 
   def last_unread_message_conversation
     @unread_messages = []
     conversations =  Conversation.where("(conversations.sender_id = ? ) OR (conversations.recipient_id =?)", id, id)
-
     conversations.each do |conversation|
       conversation.messages.each do |message|
-
         if id != message.user_id
           if message.read == false
             @unread_messages << message
@@ -57,10 +57,12 @@ class User < ActiveRecord::Base
   end
 
   def last_active_conversation
-    @last_messages = []
-    conversations =  Conversation.where("(conversations.sender_id = ? ) OR (conversations.recipient_id =?)", id, id)
-    conversations = conversations.sort{ |a,b| b.updated_at <=> a.updated_at }
-    latest_conversation = conversations.last
+    if conversations
+      @last_messages = []
+      conversations =  Conversation.where("(conversations.sender_id = ? ) OR (conversations.recipient_id =?)", id, id)
+      conversations = conversations.sort{ |a,b| b.updated_at <=> a.updated_at }
+      latest_conversation = conversations.last
+    end
   end
 
 
