@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require semantic-ui
 //= require handlebars-v2.0.0.js
 //= require_tree .
