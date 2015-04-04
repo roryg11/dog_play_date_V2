@@ -33,8 +33,8 @@
               <%= dog.name %>
             </div>
             <div class="description">
-              <%= dog.bio %>
-              <%= dog.personality %>
+              <p>Bio: <%= dog.bio %></p>
+              <p>Personality Type: <%= dog.personality %></p>
             </div>
           </div>
           <div class="ui bottom attached segment">
@@ -56,11 +56,11 @@
         <div class="ui three column grid">
           <% @dogs[0..2].each do |dog| %>
             <div class="column">
-              <div class="ui fluid pop-out card">
+              <div class="ui fluid card">
                 <div class="image dimmable">
                   <%= image_tag(dog.avatar_url) %>
                 </div>
-                <div class="content dog" data-dog-id="<%= dog.id %>">
+                <div class="content info dog" data-dog-id="<%= dog.id %>">
                   <div class="header"><%= dog.name %></div>
                   <div class="meta">
                     Adoring Human: <%= link_to dog.user.user_name, user_path(dog.user), class: "group" %>
@@ -174,11 +174,10 @@
   </div>
 </div>
 
-
 <script charset="utf-8" id="dog-modal" text="text/x-handlebars-template">
 <div class="ui modal">
   <i class="close icon"></i>
-  <div class="header">{{name}}</div>
+  <div class="ui center aligned header">{{name}}</div>
   <div class="content">
     <div class="ui medium circular image">
       <img src ={{image}}>
