@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>DogPlayDateV2</title>
+  <title>Puppy Play Date</title>
   <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.js'></script>
   <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.6/mapbox.css' rel='stylesheet' />
   <%= stylesheet_link_tag    'application', media: 'all'%>
@@ -12,7 +12,7 @@
 
 <div class="ui inverted deep-navy-background fixed menu navbar page grid">
   <% home_page = is_active?(root_path) %>
-  <%= link_to "Puppy Love", root_path, class: "brand item #{home_page}" %>
+  <%= link_to "Puppy Play Date", root_path, class: "brand item #{home_page}" %>
   <div class="right menu">
     <% if current_user %>
       <% profile_page = is_active?(profile_path) %>
@@ -59,6 +59,21 @@
 </div>
 
 <%= yield %>
+
+<div class="ui inverted bottom attached header content-div">
+    <div class="ui grid">
+      <div class="ui inverted header vertically centered ">
+        <h2>Puppy Play Date<i class="paw icon large inverted"></i></h2>
+        <p class="light-gray center aligned">A new platform to connect your pets with playmates nearby.
+          Through our extensive research, we've developed an algorithm
+          to help match your pup with an appropriate playmate</p>
+      </div>
+      <div class="ui content center aligned">
+        <p class="light-gray">An App created by Dana Mulder and Rory Grant</p>
+      </div>
+    </div>
+</div>
+
 
 <script charset="utf-8">
   $('.ui.dropdown').dropdown();
