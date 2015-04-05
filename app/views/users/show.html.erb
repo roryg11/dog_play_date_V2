@@ -24,7 +24,7 @@
         <%= @user.user_name %>'s Dogs
       </div>
       <div class="horizontal divider"></div>
-      <div class="ui three column padded page grid">
+      <div class="ui three column padded stackable page grid">
         <% @dogs.in_groups(3) do |column_dogs| %>
         <div class="column">
           <% column_dogs.each do |dog| %>
@@ -59,9 +59,8 @@
       </div>
     </div>
     <div class="ui segment" id = "map-container">
-      <h3 class="ui dividing header">Parks between you and <%= @user.first_name %></h3>
-      <div id="mapbox_map">
-      </div>
+      <h3 class="ui dividing header center aligned">Parks between you and <%= @user.first_name %></h3>
+      <div id="mapbox_map"></div>
     </div>
   </div>
 </div>
