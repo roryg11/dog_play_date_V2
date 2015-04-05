@@ -1,9 +1,6 @@
 require 'pry'
 class DogsController < ApplicationController
   before_action :authenticate_user, only: [:new, :create, :destroy, :edit]
-  def index
-    @dogs=Dog.all
-  end
 
   def new
     @dog = current_user.dogs.new
