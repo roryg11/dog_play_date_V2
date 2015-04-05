@@ -189,4 +189,67 @@ RSpec.describe User, :type => :model do
 
     expect(emma.dogs_user_can_see).to eq([andrews_dog])
   end
+
+  it "returns only conversations between user and users that have not been blocked by them or blocked them" do
+    lucy = User.create!(
+    first_name: "Lucy",
+    last_name: "van Pelt",
+    email: "ohbrothercharliebrown@gmail.com",
+    zipcode: "94117",
+    password: "dogs1234",
+    )
+
+    charlie = User.create!(
+    first_name: "Charlie",
+    last_name: "Brown",
+    email: "ilovesnoopy@gmail.com",
+    zipcode: "94117",
+    password: "dogs1234",
+    )
+
+    emma = User.create!(
+    first_name: "Emma",
+    last_name: "Stone",
+    email: "Emma@Stone.com",
+    zipcode: "94116",
+    password: "dogs1234",
+    )
+
+    andrew = User.create!(
+    first_name: "Andrew",
+    last_name: "Garfield",
+    email: "Andrew@Garfield.com",
+    zipcode: "94114",
+    password: "dogs1234",
+    )
+
+    emmas_blocked_user = Filter.create!(
+      type: "BlockedUser",
+      content: "#{charlie.id}",
+      user_id: emma.id
+    )
+
+    lucys_blocked_user = Filter.create!(
+      type: "BlockedUser",
+      content: "#{emma.id}",
+      user_id: lucy.id
+    )
+
+    conversation_1 = Conversation.create!(
+      sender_id: lucy.id,
+      recipient_id: emma.id,
+    )
+
+    conversation_2 = Conversation.create!(
+      sender_id: charlie.id,
+      recipient_id: emma.id,
+    )
+
+    conversation_3 = Conversation.create!(
+      sender_id: andrew.id,
+      recipient_id: emma.id,
+    )
+
+    expect(emma.conversations_user_can_see.map {|convo| convo.sender_id}).to eq([andrew.id])
+  end
 end

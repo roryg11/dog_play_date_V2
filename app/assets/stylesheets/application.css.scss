@@ -93,6 +93,10 @@ a:hover, .button:hover {
   color: $light-gray !important;
 }
 
+.deep-navy {
+  color: $deep-navy !important;
+}
+
 .primary-green-button {
   background: $primary-green !important;
   color: $deep-navy !important;
@@ -138,19 +142,6 @@ a:hover, .button:hover {
 
 .compact.inverted.button.red:hover {
   color: #FFFFFF !important;
-}
-
-.header-button {
-  margin: 2em 0em 0em 40em !important;
-  position: relative;
-  color: $primary-green !important;
-}
-
-.header-text {
-  margin: 2em 0em 0em 30em !important;
-  text-align: right;
-  position: relative;
-  color: $deep-navy !important;
 }
 
 .panel-text {

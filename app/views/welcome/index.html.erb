@@ -1,19 +1,21 @@
 <div class="ui inverted vertical image-div">
-    <div class="ui page grid">
-      <div class="column">
-        <h2 class="ui deep-navy header header-text">
-          PuppyLove because every dog needs a friend...
-        </h2>
-        <% if !current_user %>
-          <%= link_to "Sign Up", signup_path, class:"ui huge button inverted deep-navy header-button", id:"top-signup-button"%>
-        <% end %>
-      </div>
+    <div class="ui two column page doubling grid">
+    <div class="column">
+    </div>
+    <div class="column center aligned">
+      <h1 class="ui deep-navy">
+        Puppy Play Date
+      </h1>
+      <h3 class="ui deep-navy">The Canine Companion Matching Service</h3>
+      <% if !current_user %>
+        <%= link_to "Sign Up", signup_path, class:"ui huge button inverted deep-navy header-button", id:"top-signup-button"%>
+      <% end %>
     </div>
   </div>
 </div>
 
 
-<div id="dog-table" class="ui three column padded page grid">
+<div id="dog-table" class="ui three column padded stackable page grid">
   <h2 class="ui header page-header center aligned">Dogs</h2>
   <div class="ui horizontal divider">currently on Puppy Play Date</div>
   <% @dogs[0..5].in_groups(3) do |column_dogs| %>

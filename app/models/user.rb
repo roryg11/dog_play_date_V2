@@ -101,7 +101,15 @@ class User < ActiveRecord::Base
     unavailable_users.each do |blocked_user_id|
       dogs = dogs.where.not(user_id: blocked_user_id)
     end
-    dogs
+    dogs = dogs.where.not(user_id: id)
+  end
+
+  def conversations_user_can_see
+    conversations = Conversation.where("(conversations.sender_id = ? ) OR (conversations.recipient_id =?)", id, id)
+    unavailable_users.each do |blocked_user_id|
+      conversations = conversations.where.not("(conversations.sender_id = ? ) OR (conversations.recipient_id =?)", blocked_user_id, blocked_user_id)
+    end
+    conversations
   end
 
 end

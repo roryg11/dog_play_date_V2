@@ -3,12 +3,7 @@ class UsersController < ApplicationController
   require 'json'
   def profile
     user = current_user
-    blocked_user_ids = user.blocked_users
-    @blocked_users = []
-    @conversations = Conversation.where("(conversations.sender_id = ? ) OR (conversations.recipient_id =?)", user.id, user.id)
-    blocked_user_ids.each do |blocked_id|
-      @conversations = @conversations.where.not("(conversations.sender_id = ? ) OR (conversations.recipient_id =?)", blocked_id.content.to_i, blocked_id.content.to_i)
-    end
+    @conversations = user.conversations_user_can_see
     @dogs = Dog.where.not(user_id: user.id)
     @filters = user.filters
     @filters.each do |filter|
