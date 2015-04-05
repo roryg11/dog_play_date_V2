@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   def profile
     user = current_user
     @conversations = user.conversations_user_can_see
-    @dogs = Dog.where.not(user_id: user.id)
+    @dogs = user.dogs_user_can_see
     @filters = user.filters
     @filters.each do |filter|
       @dogs = filter.filter(@dogs)

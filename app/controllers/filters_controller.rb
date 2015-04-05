@@ -1,7 +1,7 @@
 class FiltersController < ApplicationController
   def index
     @filters = current_user.filters
-    @dogs = Dog.where.not(user_id: current_user.id)
+    @dogs = current_user.dogs_user_can_see
     @filters.each do |filter|
       @dogs = filter.filter(@dogs)
     end
