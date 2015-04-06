@@ -1,4 +1,3 @@
-require 'pry'
 class DogsController < ApplicationController
   before_action :authenticate_user, only: [:new, :create, :destroy, :edit]
 

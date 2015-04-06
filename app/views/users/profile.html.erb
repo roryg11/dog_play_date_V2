@@ -156,9 +156,6 @@
         <h2 class="ui header">
           <div class="content">
             <div class="sub header medium">Paws-itive messages from your furry friends!
-              <% if current_user.conversations.exists? && current_user.unread_messages_count > 0 %>
-                <div class="ui green label"> <%= current_user.unread_messages_count %></div>
-              <% end %>
             </div>
           </div>
         </h2>
@@ -176,13 +173,18 @@
               <%= link_to 'See Conversation', conversation_messages_path(conversation), class: "ui button primary-green-button right floated compact", id: "see-conversation-#{conversation.id}" %>
               <%= image_tag recipient.avatar, class: "ui avatar image " %>
               <div class="content">
-                <div class="header"><%= link_to recipient.user_name, conversation_messages_path(conversation), class: "header" %></div>
                 <% if conversation.messages.last %>
-                <% if conversation.messages.last.body.length > 40 %>
-                <div class="description"> <%= conversation.messages.last.body[0..40] %>... </div>
-                <% else %>
-                <div class="description"> <%= conversation.messages.last.body %> </div>
-                <% end %>
+                <div class="header"><%= link_to recipient.user_name, conversation_messages_path(conversation), id: 'message_list' %><%= conversation.messages.last.message_time %>
+                  <% if conversation.unread_messages_count > 0 %>
+                    <div class="ui red label" id='message_icon'> <%= conversation.unread_messages_count %> </div>
+                  <% end %>
+                </div>
+                  <% if conversation.messages.last.body.length > 40 %>
+                  <div class="description"> <%= conversation.messages.last.body[0..40] %>... </div>
+                  <% else %>
+                  <div class="description"> <%= conversation.messages.last.body %> </div>
+                  <% end %>
+
                 <% end %>
               </div>
             </div>

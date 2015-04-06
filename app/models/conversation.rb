@@ -7,4 +7,17 @@ class Conversation < ActiveRecord::Base
   scope :between, -> (sender_id, recipient_id) do
     where("(conversations.sender_id = ? AND conversations.recipient_id =?) OR (conversations.sender_id = ? AND conversations.recipient_id =?)", sender_id,recipient_id, recipient_id, sender_id)
   end
+
+  def unread_messages_count
+    if messages.exists?
+    @unread_messages = []
+      messages.each do |message|
+        if message.read == false
+          @unread_messages << message
+        end
+      end
+    end
+    @unread_messages.length
+  end
+  
 end
