@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
 
   @clients = []
   EM.run do
-    EM::WebSocket.start(host: ENV['WEBSOCKET_HOST'], port: ENV['WEBSOCKET_PORT']) do |ws|
+    EM::WebSocket.start(host: "0.0.0.0", port: 3060) do |ws|
       crypt = ActiveSupport::MessageEncryptor.new(ENV['SECRET_KEY_BASE'])
       ws.onopen do |handshake|
         conversation_data = crypt.decrypt_and_verify(handshake.query_string)

@@ -117,7 +117,7 @@
 
   var key = '<%= @conv_id %>';
   var socket, host;
-  host = "ws://<%= ENV['WEBSOCKET_HOST'] %>:<%= ENV['WEBSOCKET_PORT']%>?"+ key;
+  host = "ws://0.0.0.0:3060?"+ key;
 
   function onErrors(msg){
     $("#chat-log .error").text( msg);
