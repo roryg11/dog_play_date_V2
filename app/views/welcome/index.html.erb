@@ -57,7 +57,7 @@
           <%= image_tag(dog.user.avatar) %>
         </div>
         <% if current_user %>
-          <%= link_to dog.user.user_name, user_path(dog.user) %> <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: dog.user.id), id: "message-user-#{dog.user.id}", method: 'post'%>
+          <%= link_to dog.user.user_name, user_path(dog.user) %> | <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: dog.user.id), id: "message-user-#{dog.user.id}", method: 'post'%>
         <% end %>
       </div>
     </div>

@@ -32,7 +32,7 @@
 
 
  .image-div {
-   background: url(/assets/img_00791.jpg) no-repeat center center;
+   background: url(/assets/img_00791.jpg) no-repeat center center fixed;
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
@@ -169,6 +169,10 @@ a:hover, .button:hover {
 .active {
   color: $primary-green !important;
   font-weight: bold;
+}
+
+.validation-error-message {
+  background-color: red;
 }
 
 @media (max-width: 767px) {

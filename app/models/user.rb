@@ -10,9 +10,12 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader, :default_user_url => "/images/fallback/missinguser.jpg"
 
   validates :email, uniqueness: true
-  validates :first_name, :last_name, :email, presence: true
+  validates :first_name, :last_name, :email, :zipcode, presence: true
   validates :password, presence: true, :if => :password
   validates :password, length: {minimum: 4}, :if => :password
+  validates :zipcode, length: {is: 5}
+  validates :zipcode, format: { with: /d/,
+    message: "only allows numbers" }
   validates :first_name, length: {minimum: 2}
 
   def full_name

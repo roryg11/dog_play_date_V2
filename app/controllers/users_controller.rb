@@ -23,14 +23,14 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to profile_path
       flash[:notice] = "Profile successfully updated"
-    else
-      render :edit
-    end
-    response = RestClient.get "https://maps.googleapis.com/maps/api/geocode/json?address=" + @user.zipcode.to_s + "&key=" + ENV['GOOGLE_API_KEY']
+      response = RestClient.get "https://maps.googleapis.com/maps/api/geocode/json?address=" + @user.zipcode.to_s + "&key=" + ENV['GOOGLE_API_KEY']
       json = JSON.parse(response)
       @user.latitude = json["results"][0]["geometry"]["location"]["lat"]
       @user.longitude = json["results"][0]["geometry"]["location"]["lng"]
       @user.save
+    else
+      render :edit
+    end
   end
 
   def show
