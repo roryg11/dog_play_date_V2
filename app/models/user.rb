@@ -14,8 +14,6 @@ class User < ActiveRecord::Base
   validates :password, presence: true, :if => :password
   validates :password, length: {minimum: 4}, :if => :password
   validates :zipcode, length: {is: 5}
-  validates :zipcode, format: { with: /d/,
-    message: "only allows numbers" }
   validates :first_name, length: {minimum: 2}
 
   def full_name
