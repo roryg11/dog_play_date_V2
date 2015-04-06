@@ -21,5 +21,5 @@ class Conversation < ActiveRecord::Base
     end
     @unread_messages.length
   end
-  
+
 end
