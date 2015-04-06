@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<div class="ui inverted deep-navy-background fixed menu navbar page grid">
+<div class="ui inverted deep-navy-background fixed menu navbar computer tablet only page grid">
   <% home_page = is_active?(root_path) %>
   <%= link_to "Puppy Play Date", root_path, class: "brand item #{home_page}" %>
   <div class="right menu">
@@ -38,25 +38,56 @@
   </div>
 </div>
 
-<div class="page-body">
+<div class="mobile only narrow row">
+  <div class="ui vertical inverted deep-navy-background navbar menu">
+    <div class="ui menu vertical inverted deep-navy-background">
+      <%= link_to "Puppy Play Date", root_path, class: "brand item #{home_page} center aligned" %>
+      <% if current_user %>
+        <% profile_page = is_active?(profile_path) %>
+          <%= link_to current_user.full_name, profile_path, class: "ui item #{profile_page}", id:"#{current_user.first_name}-profile-path" %>
+        <% conversation_page = is_active?(conversations_path) %>
+        <% if current_user.conversations.exists? %>
+          <% if current_user.unread_messages_count == 0 %>
+            <%= link_to 'Inbox', conversation_messages_path(current_user.last_active_conversation), class: "ui item #{conversation_page}" %>
+          <% else %>
+            <%= link_to 'Inbox', conversation_messages_path(current_user.last_unread_message_conversation), class: "ui item #{conversation_page}" %>
+            <div class="ui red label"><%= link_to current_user.unread_messages_count, conversation_messages_path(current_user.last_unread_message_conversation) %></div>
+          <% end %>
+        <% end %>
+        <% search_page = is_active?(dogs_path) %>
+          <%= link_to "Search", dogs_path, class: "item #{search_page}" %>
+          <%= link_to "Sign Out", signout_path, class: "item"%>
+      <% else %>
+        <% sign_up_page = is_active?(signup_path) %>
+          <%= link_to 'Sign Up', signup_path, class: "item #{sign_up_page}" %>
+        <% sign_in_page = is_active?(signin_path) %>
+          <%= link_to "Sign In", signin_path, class: "item #{sign_in_page}" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
   <% if notice %>
-    <div class="ui positive message">
-      <i class="close icon"></i>
-      <div class="header">
-        <p id="notice" class="text-center"><%= notice %></p>
+    <div class="page-body">
+      <div class="ui positive message">
+        <i class="close icon"></i>
+        <div class="header">
+          <p id="notice" class="text-center"><%= notice %></p>
+        </div>
       </div>
     </div>
   <% end %>
 
   <% if alert %>
-  <div class="ui error message">
-    <i class="close icon"></i>
-    <div class="header">
-      <p id="notice" class="text-center"><%= alert %></p>
+  <div class="page-body">
+    <div class="ui error message">
+      <i class="close icon"></i>
+      <div class="header">
+        <p id="notice" class="text-center"><%= alert %></p>
+      </div>
     </div>
   </div>
   <% end %>
-</div>
 
 <%= yield %>
 
@@ -79,6 +110,9 @@
   $('.ui.dropdown').dropdown();
   $('.message .close').on('click', function() {
   $(this).closest('.message').fadeOut();
+  $('.right.menu.open').on("click",function(e){
+      e.preventDefault();
+  $('.ui.vertical.menu').toggle();
 });
 </script>
 </body>

@@ -24,23 +24,22 @@
  $light-gray: #969696;
  $deep-navy: #252C3D;
 
- body {
-   margin-top: 45px;
- }
-
  .page-body {
-   margin: 50px !important;
+   margin-top: 50px !important;
+   margin-right: 25px !important;
+   margin-left: 25px !important;
  }
 
 
  .image-div {
-   background: url(/assets/img_00791.jpg) no-repeat center center fixed;
+   background: url(/assets/img_00791.jpg) no-repeat center center;
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
    background-size: cover;
    width: 100%;
    height: 600px;
+   margin-top: 40px !important;
  }
 
  .content-div {
@@ -165,4 +164,29 @@ a:hover, .button:hover {
 }
 .comment{
   height: 45px;
+}
+
+@media (max-width: 767px) {
+  .ui.mobile.only.grid, .ui.grid >.mobile.only.row {
+    display: block!important;
+    width: 100% !important;
+  }
+  .ui.vertical.menu {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .ui.computer.only.grid, .ui.grid >.computer.only.row {
+    display: block!important;
+  }
+  .ui.tablet.only.grid, .ui.grid >.tablet.only.row {
+    display: block!important;
+  }
+  .ui.mobile.only.grid, .ui.grid >.mobile.only.row {
+    display: none !important;
+  }
+  .ui.vertical.menu {
+    display: none !important;
+  }
 }

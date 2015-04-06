@@ -1,4 +1,4 @@
-<div class="ui stackable grid" id="inbox">
+<div class="ui stackable three column grid page-body" id="inbox">
   <div class="row">
     <div class="four wide column">
       <div class="ui segment">
@@ -84,7 +84,7 @@
         </div>
       </div>
     </div>
-    <div class="six wide column">
+    <div class="four wide column">
      <div class="ui segment" id = "map-container">
        <h3 class="ui dividing header">Dog parks between you and <%= recipient.first_name %></h3>
        <div id="mapbox_map" data-userlatitude=<%= current_user.latitude %> data-userlongitude=<%= current_user.longitude %> data-otherlatitude=<%= recipient.latitude %> data-otherlongitude=<%= recipient.longitude %>>

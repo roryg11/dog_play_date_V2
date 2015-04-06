@@ -6,7 +6,7 @@
   <div class="ui segment">
     <div class="ui form">
       <form accept-charset="UTF-8" action="/dogs" method="get">
-      <div class="four fields">
+      <div class="four stackable fields">
         <div class="field">
           <label>Gender:</label>
           <div class="ui selection dropdown">
@@ -79,7 +79,7 @@
     </div>
   </div>
 
-  <div class="ui three column padded page grid">
+  <div class="ui three column padded stackable page grid">
     <% @dogs.in_groups(3) do |column_dogs| %>
     <div class="column">
       <% column_dogs.each do |dog| %>
