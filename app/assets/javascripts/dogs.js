@@ -2,10 +2,13 @@ $(document).ready(function(){
   $('.content.info').on('click', function(){
     var div = $(this).find('#more-info');
     var span = $(this).find('span');
+    var shortDescription = $(this).find('.bio')
+    shortDescription.fadeOut().addClass('inactive')
     div.fadeIn().toggleClass('inactive');
     if(div.hasClass('inactive')){
       span.text('more');
       div.fadeOut().addClass('inactive');
+      shortDescription.fadeIn().removeClass('inactive')
     }else{
       span.text('less');
       }

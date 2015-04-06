@@ -38,8 +38,17 @@
         <div class="meta">
           Adoring Human: <%= dog.user.full_name %>
         </div>
-        <div class="description" data-dog-id=<%="#{dog.id}"%>><%= dog.bio %>...<span id="more-link">more</span>
+        <div class="description" data-dog-id=<%="#{dog.id}"%>>
+          <% if dog.bio.length > 100 %>
+            <p class="bio"><%= dog.bio[0..100] %>...<span id="more-link">more</span></p>
+          <% else %>
+            <p class="bio"><%= dog.bio %>...<span id="more-link">more</span></p>
+          <% end %>
           <div class="inactive" id="more-info">
+            <p>
+              <%= dog.bio %>
+              <span id="more-link">less</span>
+            </p>
             <ul>
               <li><strong>Breed: </strong> <%= dog.breed %> </li>
               <li><strong>Age: </strong> <%= dog.age %></li>
