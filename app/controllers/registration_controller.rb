@@ -13,7 +13,7 @@ class RegistrationController < ApplicationController
       @user.latitude = json["results"][0]["geometry"]["location"]["lat"]
       @user.longitude = json["results"][0]["geometry"]["location"]["lng"]
       @user.save
-      filter = @user.filters.new({type: "Zipcode", content: @user.zipcode.to_s})
+      filter = @user.filters.new({type: "Zipcode", content: "#{@user.latitude}, #{@user.longitude}"})
       filter.save
       redirect_to new_dog_path
     else

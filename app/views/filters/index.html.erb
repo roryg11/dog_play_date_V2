@@ -23,8 +23,8 @@
         <tr>
           <% if filter.id != nil %>
             <% if filter.type == "Zipcode" %>
-              <td>Based on <%= filter.type %>: <%= filter.content %></td>
-              <td><%= link_to "Edit Location", edit_filter_path(filter), id: "edit-filter-#{filter.id}" %></td>
+              <td>Based on <%= filter.type %>: <%= current_user.zipcode %></td>
+              <td>Change your zipcode <%= link_to "here", edit_user_path(current_user) %> </td>
             <% elsif filter.type == "BlockedUser" %>
             <% else %>
               <td><%= filter.type %> Preference: <%= filter.content %></td>

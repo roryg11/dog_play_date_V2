@@ -175,6 +175,9 @@ a:hover, .button:hover {
   background-color: red;
 }
 
+.description.text{
+  color: $dark-gray !important;
+}
 @media (max-width: 767px) {
   .ui.mobile.only.grid, .ui.grid >.mobile.only.row {
     display: block!important;

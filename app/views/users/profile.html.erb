@@ -54,42 +54,42 @@
       <div class="ui segment">
         <h3 class="ui header center aligned">Potential Playmates</h3>
         <div class="ui three column stackable grid">
-          <% @dogs[0..2].each do |dog| %>
-            <div class="column">
-              <div class="ui fluid card">
-                <div class="image dimmable">
-                  <%= image_tag(dog.avatar_url) %>
-                </div>
-                <div class="content info dog" data-dog-id="<%= dog.id %>">
-                  <div class="header"><%= dog.name %></div>
-                  <div class="meta">
-                    Adoring Human: <%= link_to dog.user.user_name, user_path(dog.user), class: "group" %>
+            <% @dogs[0..2].each do |dog| %>
+              <div class="column">
+                <div class="ui fluid card">
+                  <div class="image dimmable">
+                    <%= image_tag(dog.avatar_url) %>
                   </div>
-                  <div class="description" data-dog-id=<%="#{dog.id}"%>><%= dog.bio %>...<span><strong>more</strong></span>
-                    <div class="inactive" id="more-info">
-                      <ul>
-                        <li><strong>Breed: </strong> <%= dog.breed %> </li>
-                        <li><strong>Age: </strong> <%= dog.age %></li>
-                        <li><strong>Gender: </strong><%= dog.gender %></li>
-                        <li><strong>Size: </strong><%= dog.size %></li>
-                        <li><strong>Play: </strong><%= dog.play %></li>
-                        <li><strong>Personality: </strong><%= dog.personality %></li>
-                      </ul>
+                  <div class="content info dog" data-dog-id="<%= dog.id %>">
+                    <div class="header"><%= dog.name %></div>
+                    <div class="meta">
+                      Adoring Human: <%= link_to dog.user.user_name, user_path(dog.user), class: "group" %>
                     </div>
-                  </div>
+                    <div class="description" data-dog-id=<%="#{dog.id}"%>><%= dog.bio %>...<span><strong>more</strong></span>
+                      <div class="inactive" id="more-info">
+                        <ul>
+                          <li><strong>Breed: </strong> <%= dog.breed %> </li>
+                          <li><strong>Age: </strong> <%= dog.age %></li>
+                          <li><strong>Gender: </strong><%= dog.gender %></li>
+                          <li><strong>Size: </strong><%= dog.size %></li>
+                          <li><strong>Play: </strong><%= dog.play %></li>
+                          <li><strong>Personality: </strong><%= dog.personality %></li>
+                        </ul>
+                      </div>
+                    </div>
 
-                </div>
-                <div class="extra content">
-                  <div class="ui avatar image">
-                    <%= image_tag(dog.user.avatar_url) %>
                   </div>
-                  <% if current_user %>
-                  <%= dog.user.user_name  %> <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: dog.user.id), method: 'post'%>
-                  <% end %>
+                  <div class="extra content">
+                    <div class="ui avatar image">
+                      <%= image_tag(dog.user.avatar_url) %>
+                    </div>
+                    <% if current_user %>
+                    <%= dog.user.user_name  %> | <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: dog.user.id), method: 'post'%>
+                    <% end %>
+                  </div>
                 </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
         </div>
         <h4>Dog Preferences</h4>
         <div class="ui segment">
@@ -106,7 +106,7 @@
               <tr>
                 <% if filter.id != nil %>
                   <% if filter.type == "Zipcode" %>
-                    <td>Based on <%= filter.type %>: <%= filter.content %></td>
+                    <td>Based on <%= filter.type %>: <%= current_user.zipcode %></td>
                     <td></td>
                   <% elsif filter.type == "BlockedUser" %>
                   <% else %>
@@ -193,7 +193,7 @@
     <div class="ui medium circular image">
       <img src ={{image}}>
     </div>
-    <div class="description">
+    <div class="description text">
       <h3>A Little Bit About Me</h3>
       <p>{{bio}}</p>
       <ul>
