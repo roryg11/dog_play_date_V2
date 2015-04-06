@@ -166,6 +166,11 @@ a:hover, .button:hover {
   height: 45px;
 }
 
+.active {
+  color: $primary-green !important;
+  font-weight: bold;
+}
+
 @media (max-width: 767px) {
   .ui.mobile.only.grid, .ui.grid >.mobile.only.row {
     display: block!important;
@@ -173,6 +178,9 @@ a:hover, .button:hover {
   }
   .ui.vertical.menu {
     width: 100% !important;
+  }
+  .ui.breadcrumb.registration {
+    display: none !important;
   }
 }
 
