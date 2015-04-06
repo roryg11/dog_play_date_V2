@@ -174,15 +174,17 @@
               <%= link_to 'See Conversation', conversation_messages_path(conversation), class: "ui button primary-green-button right floated compact", id: "see-conversation-#{conversation.id}" %>
               <%= image_tag recipient.avatar, class: "ui avatar image " %>
               <div class="content">
+                <% if conversation.messages.last %>
                 <div class="header"><%= link_to recipient.user_name, conversation_messages_path(conversation), id: 'message_list' %><%= conversation.messages.last.message_time %>
-                  <% if conversation.unread_messages_count(current_user.id) > 0 %>
-                    <div class="ui red label" id='message_icon'> <%= conversation.unread_messages_count(current_user.id) %> </div>
+                  <% if conversation.unread_messages_count > 0 %>
+                    <div class="ui red label" id='message_icon'> <%= conversation.unread_messages_count %> </div>
                   <% end %>
                 </div>
-                <% if conversation.messages.last.body.length > 40 %>
+                  <% if conversation.messages.last.body.length > 40 %>
                   <div class="description"> <%= conversation.messages.last.body[0..40] %>... </div>
-                <% else %>
+                  <% else %>
                   <div class="description"> <%= conversation.messages.last.body %> </div>
+                  <% end %>
                 <% end %>
               </div>
             </div>
