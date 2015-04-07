@@ -173,8 +173,8 @@
                 <% recipient = User.find(conversation.sender_id) %>
                 <% end %>
               <% end %>
+              <% if conversation.messages.last %>
               <div class="item">
-                <% if conversation.messages.last %>
                 <%= link_to 'Block User', filters_path(:filter => {type: "BlockedUser", content:"#{recipient.id}"}), method: 'post', id: "block-user-#{recipient.id}-action", class: "ui right floated ui button compact inverted red"%>
                 <%= link_to 'See Conversation', conversation_messages_path(conversation), class: "ui button primary-green-button right floated compact", id: "see-conversation-#{conversation.id}" %>
                 <%= image_tag recipient.avatar, class: "ui avatar image " %>
