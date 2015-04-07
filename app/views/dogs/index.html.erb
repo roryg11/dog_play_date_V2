@@ -1,7 +1,8 @@
 <div class="page-body">
   <h2>Doggies Near You<i class="paw icon"></i></h2>
   <% if @dogs == [] %>
-    There are no dogs currently registered in your area :(
+    <p>There are no dogs currently registered in your area :( </p>
+    <p><%= link_to 'Search through all dogs', '?dogs=all' %></p>
   <% end %>
   <div class="ui segment">
     <div class="ui form">

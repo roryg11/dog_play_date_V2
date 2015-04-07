@@ -2,12 +2,27 @@
   <div class="row">
     <div class="column inbox">
       <div class="ui segment">
-        <div class="ui medium divided animated list">
+        <div class="ui medium divided animated list" id="listing_inbox">
           <div class="header">
             <h3 class="ui center aligned header">Inbox</h3>
           </div>
           <% if @latest_messages == [] %>
-            No messages yet!  <%= link_to 'Find Doggies in your area!', dogs_path %>
+            <p id="no_messages">No messages yet!  <%= link_to 'Find Doggies in your area!', dogs_path %></p>
+          <% end %>
+          <% if @conversation.messages == [] %>
+            <% if @conversation.recipient_id == current_user.id %>
+              <% recipient = User.find(@conversation.sender_id) %>
+            <% else %>
+              <% recipient = User.find(@conversation.recipient_id) %>
+            <% end %>
+            <div class="item">
+              <%= image_tag recipient.avatar, class: "ui avatar image" %>
+              <div class="current_conversation content">
+                <div class="header" id="no_message_content"><%= recipient.user_name %></div>
+                <div class="description inbox_content" id="current_conversation">
+                </div>
+              </div>
+            </div>
           <% end %>
         <% @latest_messages.each do |message| %>
           <% conversation = Conversation.find(message.conversation_id) %>
@@ -18,23 +33,51 @@
           <% end %>
           <div class="item">
             <%= image_tag recipient.avatar, class: "ui avatar image" %>
+            <% if conversation == @conversation %>
+            <div class="current_conversation content">
+              <div class="header"><%= link_to recipient.user_name, conversation_messages_path(conversation), class: "header" %></div>
+                <div class="description inbox_content" id="current_conversation">
+                <% if message.user_id != current_user.id && message.read == false %>
+                  <strong>
+                  <% if message.body.length > 90 %>
+                    <%= message.body[0..30] %>...
+                  <% else %>
+                    <%= message.body %>
+                  <% end %>
+                  </strong>
+                <% else %>
+                  <% if message.body.length > 90 %>
+                    <%= message.body[0..30] %>...
+                  <% else %>
+                    <%= message.body %>
+                  <% end %>
+                <% end %>
+                </div>
+              </div>
+            </div>
+            <% else %>
             <div class="content">
               <div class="header"><%= link_to recipient.user_name, conversation_messages_path(conversation), class: "header" %></div>
-              <% if message.user_id != current_user.id && message.read == false %>
-                <% if message.body.length > 90 %>
-                  <div class="description"><strong> <%= message.body[0..87] %>... </strong></div>
+                <div class="description inbox_content">
+                <% if message.user_id != current_user.id && message.read == false %>
+                  <strong>
+                  <% if message.body.length > 90 %>
+                    <%= message.body[0..30] %>...
+                  <% else %>
+                    <%= message.body %>
+                  <% end %>
+                  </strong>
                 <% else %>
-                  <div class="description"> <strong><%= message.body %></strong> </div>
+                  <% if message.body.length > 90 %>
+                    <%= message.body[0..30] %>...
+                  <% else %>
+                    <%= message.body %>
+                  <% end %>
                 <% end %>
-              <% else %>
-                <% if message.body.length > 90 %>
-                  <div class="description"> <%= message.body[0..87] %>... </div>
-                <% else %>
-                  <div class="description"> <%= message.body %> </div>
-                <% end %>
-              <% end %>
+                </div>
+              </div>
             </div>
-          </div>
+          <% end %>
         <% end %>
         </div>
       </div>
@@ -48,7 +91,7 @@
           <% recipient = User.find(@conversation.sender_id) %>
         <% end %>
         <%= link_to 'Block User', filters_path(:filter => {type: "BlockedUser", content:"#{recipient.id}"}), method: 'post', id: "block-user-#{recipient.id}-action", class: "ui right floated ui button compact inverted red"%>
-        <h3 class="ui dividing header" id="<%= @conversation.id %>"><%= image_tag recipient.avatar_url, class: "ui avatar image" %>Conversation with <%= recipient.user_name %></h3>
+        <h3 class="ui dividing header inbox-header" id="<%= @conversation.id %>"><%= image_tag recipient.avatar_url, class: "ui avatar image" %>Conversation with <%= recipient.user_name %></h3>
           <div id="container">
             <% if @over_ten %>
             <%= link_to 'Show Previous', '?m=all', class: "avatar" %>
@@ -113,6 +156,21 @@
     var newComment = template(context);
 
     $('#container').append(newComment);
+
+    var convo_context = {
+      convoText: content.body
+    }
+
+    var convo_source = $('#add-newest-conversation').html();
+    var convo_template = Handlebars.compile(convo_source);
+
+
+    var newConvo = convo_template(convo_context);
+    $('#current_conversation').remove();
+    $('#no_messages').remove();
+    $('#no_message_content').removeAttr('id');
+    $('.current_conversation.content').append(newConvo);
+
   }
 
   var key = '<%= @conv_id %>';
@@ -160,7 +218,6 @@
   function send() {
     var text = $("#message").val();
     if (text == '') {
-
       onErrors("Please Enter a Message");
       return;
     }
@@ -194,5 +251,11 @@
       </div>
       <div class="text">{{convoText}}</div>
     </div>
+  </div>
+</script>
+
+<script id="add-newest-conversation" type="text/x-handlebars-template" charset="utf-8">
+  <div class="description inbox_content" id="current_conversation">
+    {{convoText}}
   </div>
 </script>

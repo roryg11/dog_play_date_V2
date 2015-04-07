@@ -163,7 +163,7 @@ a:hover, .button:hover {
   color: #FF0000;
 }
 .comment{
-  height: 45px;
+  margin-top: 5px;
 }
 
 #message_list{
@@ -180,6 +180,9 @@ a:hover, .button:hover {
 
 .validation-error-message {
   background-color: red;
+}
+#no_message_content{
+  color: #939393;
 }
 
 .description.text{

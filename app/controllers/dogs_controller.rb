@@ -11,9 +11,11 @@ class DogsController < ApplicationController
       zip_filter = current_user.filters.where(:type=> "Zipcode")[0]
       @dogs = zip_filter.filter(@dogs)
       @dogs = @dogs.where.not(user_id: current_user.id)
+      if !params[:dogs].blank?
+        @dogs = current_user.dogs_user_can_see
+      end
     end
     if !params[:g].blank?
-      puts "filtering by gender"
       @dogs = @dogs.where(:gender=> params[:g])
     end
     if !params[:n].blank?
