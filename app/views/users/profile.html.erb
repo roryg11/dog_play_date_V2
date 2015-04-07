@@ -32,9 +32,13 @@
               </div>
               <%= dog.name %>
             </div>
-            <div class="description">
-              <p><strong>Bio:</strong><%= dog.bio %><p>
-              <p><strong>Personality:</strong><%= dog.personality %><p>
+            <div class="content">
+              <% if dog.bio.length > 150 %>
+                <p><%= dog.bio[0..150] %>...<p>
+              <% else %>
+                <p><%= dog.bio %></p>
+              <% end %>
+              <p><strong>Personality:</strong> <%= dog.personality %><p>
             </div>
           </div>
           <div class="ui bottom attached segment">
@@ -49,7 +53,6 @@
       </div>
     </div>
   </div>
-</div>
   <div class="eleven wide column">
     <div class="ui segment">
       <div class="ui segment">

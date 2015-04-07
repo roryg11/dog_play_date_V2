@@ -12,6 +12,8 @@
     <%= form_for @user, url: signup_path, html: {class: "ui form", id: "signup-form"} do |f| %>
       <%= render 'shared/errors', object: @user %>
       <div class="ui form segment">
+        <h2 class="ui header">Sign Yourself Up!</h2>
+        <p>(you'll sign your dog up on the next page)</p>
         <div class="three fields">
           <div class="field">
             <%= f.label :first_name %>
