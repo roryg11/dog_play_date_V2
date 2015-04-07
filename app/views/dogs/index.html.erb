@@ -4,12 +4,6 @@
     <p>There are no dogs currently registered in your area :( </p>
     <p><%= link_to 'Search through all dogs', '?dogs=all' %></p>
   <% end %>
-  <% if @show_all_dogs == false %>
-    <h2>Doggies Near You<i class="paw icon"></i></h2>
-    <p><%= link_to 'Search through all dogs', '?dogs=all' %></p>
-  <% else %>
-    <h2>All Puppy Play Date Dogs<i class="paw icon"></i></h2>
-  <% end %>
   <div class="ui segment">
     <div class="ui form">
       <form accept-charset="UTF-8" action="/dogs" method="get">
