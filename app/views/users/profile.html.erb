@@ -166,26 +166,32 @@
         <div class="ui segment">
           <div class="ui divided animated list">
             <% @conversations.each do |conversation| %>
-            <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
-              <% if conversation.sender_id == current_user.id %>
-              <% recipient = User.find(conversation.recipient_id) %>
-              <% else %>
-              <% recipient = User.find(conversation.sender_id) %>
-              <% end %>
-            <% end %>
-            <% if conversation.messages.last %>
-            <div class="item">
-              <%= link_to 'Block User', filters_path(:filter => {type: "BlockedUser", content:"#{recipient.id}"}), method: 'post', id: "block-user-#{recipient.id}-action", class: "ui right floated ui button compact inverted red"%>
-              <%= link_to 'See Conversation', conversation_messages_path(conversation), class: "ui button primary-green-button right floated compact", id: "see-conversation-#{conversation.id}" %>
-              <%= image_tag recipient.avatar, class: "ui avatar image " %>
-              <div class="content">
-                <div class="header"><%= link_to recipient.user_name, conversation_messages_path(conversation), id: 'message_list' %><%= conversation.messages.last.message_time %>
-                  <% if conversation.unread_messages_count > 0 %>
-                    <div class="ui red label" id='message_icon'> <%= conversation.unread_messages_count %> </div>
+              <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+                <% if conversation.sender_id == current_user.id %>
+                <% recipient = User.find(conversation.recipient_id) %>
+                <% else %>
+                <% recipient = User.find(conversation.sender_id) %>
+                <% end %>
+              <% end  %>
+              <div class="item">
+                <%= link_to 'Block User', filters_path(:filter => {type: "BlockedUser", content:"#{recipient.id}"}), method: 'post', id: "block-user-#{recipient.id}-action", class: "ui right floated ui button compact inverted red"%>
+                <%= link_to 'See Conversation', conversation_messages_path(conversation), class: "ui button primary-green-button right floated compact", id: "see-conversation-#{conversation.id}" %>
+                <%= image_tag recipient.avatar, class: "ui avatar image " %>
+                <div class="content">
+                  <% if conversation.messages.last %>
+                  <div class="header"><%= link_to recipient.user_name, conversation_messages_path(conversation), id: 'message_list' %><%= conversation.messages.last.message_time %>
+                    <% if conversation.unread_messages_count(current_user.id) > 0 %>
+                      <div class="ui red label" id='message_icon'> <%= conversation.unread_messages_count(current_user.id) %> </div>
+                    <% end %>
+                  </div>
+                    <% if conversation.messages.last.body.length > 40 %>
+                    <div class="description"> <%= conversation.messages.last.body[0..40] %>... </div>
+                    <% else %>
+                    <div class="description"> <%= conversation.messages.last.body %> </div>
+                    <% end %>
                   <% end %>
                 </div>
               </div>
-            <% end %>
             <% end %>
           </div>
         </div>

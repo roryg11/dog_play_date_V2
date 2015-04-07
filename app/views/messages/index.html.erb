@@ -92,7 +92,7 @@
         <% end %>
         <%= link_to 'Block User', filters_path(:filter => {type: "BlockedUser", content:"#{recipient.id}"}), method: 'post', id: "block-user-#{recipient.id}-action", class: "ui right floated ui button compact inverted red"%>
         <h3 class="ui dividing header inbox-header" id="<%= @conversation.id %>"><%= image_tag recipient.avatar_url, class: "ui avatar image" %>Conversation with <%= recipient.user_name %></h3>
-          <div id="container">
+          <div id="message_container">
             <% if @over_ten %>
             <%= link_to 'Show Previous', '?m=all', class: "avatar" %>
             <% end %>
