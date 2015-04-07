@@ -2,7 +2,6 @@
   <div class="five wide column">
     <div class="ui segment">
       <a class="ui ribbon label"><%= current_user.full_name %></a>
-
       <div class="ui small circular image">
         <img id="user_image" src=<%= current_user.avatar %>>
       </div>
@@ -34,23 +33,23 @@
             </div>
             <div class="content">
               <% if dog.bio.length > 150 %>
-                <p><%= dog.bio[0..150] %>...<p>
+                <p><%= dog.bio[0..150] %>...</p>
               <% else %>
                 <p><%= dog.bio %></p>
               <% end %>
-              <p><strong>Personality:</strong> <%= dog.personality %><p>
+              <p><strong>Personality:</strong> <%= dog.personality %></p>
             </div>
           </div>
           <div class="ui bottom attached segment">
             <%= link_to "Edit", edit_dog_path(dog), id:"edit-dog-#{dog.id}-action", class: "ui inverted primary-green button" %>
             <%= link_to 'Delete Dog', dog_path(dog), method: :delete, data: {confirm: "Are you sure?"}, id:"delete-dog-#{dog.id}-action", class: "ui button" %>
           </div>
-          <% end %>
           <div class ="one wide field"></div>
         </div>
         <% end %>
-        <%= link_to "Add Dog", new_dog_path, id: "add-dog-action", class: "ui button primary-green-button" %>
       </div>
+      <% end %>
+      <%= link_to "Add Dog", new_dog_path, id: "add-dog-action", class: "ui button primary-green-button" %>
     </div>
   </div>
   <div class="eleven wide column">
@@ -156,8 +155,7 @@
       <a class="ui ribbon label">Conversations</a>
       <h2 class="ui header">
         <div class="content">
-          <div class="sub header medium">Paws-itive messages from your furry friends!
-          </div>
+          <div class="sub header medium">Paws-itive messages from your furry friends!</div>
         </div>
       </h2>
       <div class="ui segment">
@@ -181,15 +179,15 @@
                     <div class="ui red label" id='message_icon'> <%= conversation.unread_messages_count(current_user.id) %> </div>
                   <% end %>
                 </div>
-                  <% if conversation.messages.last.body.length > 40 %>
-                    <div class="description"> <%= conversation.messages.last.body[0..40] %>... </div>
-                  <% else %>
-                    <div class="description"> <%= conversation.messages.last.body %> </div>
-                  <% end %>
+                <% if conversation.messages.last.body.length > 40 %>
+                  <div class="description"> <%= conversation.messages.last.body[0..40] %>... </div>
+                <% else %>
+                  <div class="description"> <%= conversation.messages.last.body %> </div>
                 <% end %>
               </div>
             </div>
             <% end %>
+          <% end %>
         </div>
       </div>
     </div>
