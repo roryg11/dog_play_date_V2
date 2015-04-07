@@ -49,7 +49,9 @@ $(document).ready(function(){
       url: '/parks/geojson',
       dataType:"json",
     }).done(function(results) {
+      console.log("in the AJAX call");
       dogParksCollection = results[0];
+      console.log(dogParksCollection);
       L.mapbox.featureLayer().setGeoJSON(dogParksCollection).addTo(map);
     });
   }
