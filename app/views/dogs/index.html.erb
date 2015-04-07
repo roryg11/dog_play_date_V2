@@ -100,8 +100,17 @@
             <div class="meta">
               Adoring Human: <%= dog.user.user_name %>
             </div>
-            <div class="description" data-dog-id=<%="#{dog.id}"%>><%= dog.bio %>...<span><strong>more</strong></span>
+            <div class="description" data-dog-id=<%="#{dog.id}"%>>
+              <% if dog.bio.length > 100 %>
+                <p class="bio"><%= dog.bio[0..100] %>...<span id="more-link">more</span></p>
+              <% else %>
+                <p class="bio"><%= dog.bio %>...<span id="more-link">more</span></p>
+              <% end %>
               <div class="inactive" id="more-info">
+                <p>
+                  <%= dog.bio %>
+                  <span id="more-link">less</span>
+                </p>
                 <ul>
                   <li><strong>Breed: </strong> <%= dog.breed %> </li>
                   <li><strong>Age: </strong> <%= dog.age %></li>
@@ -119,7 +128,7 @@
               <%= image_tag(dog.user.avatar_url) %>
             </div>
             <% if current_user %>
-              <%= link_to dog.user.user_name, user_path(dog.user) %> <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: dog.user.id), method: 'post'%>
+              <%= link_to dog.user.user_name, user_path(dog.user) %> | <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: dog.user.id), method: 'post'%>
             <% end %>
           </div>
         </div>

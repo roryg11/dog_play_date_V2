@@ -38,8 +38,17 @@
                 <div class="meta">
                   Adoring Human: <%= link_to dog.user.user_name, user_path(dog.user), class: "group" %>
                 </div>
-                <div class="description" data-dog-id=<%="#{dog.id}"%>><%= dog.bio %>...<span><strong>more</strong></span>
-                  <div class="inactive" id="more-info">
+                <div class="description" data-dog-id=<%="#{dog.id}"%>>
+                  <% if dog.bio.length > 100 %>
+                    <p class="bio"><%= dog.bio[0..100] %>...<span id="more-link">more</span></p>
+                  <% else %>
+                    <p class="bio"><%= dog.bio %>...<span id="more-link">more</span></p>
+                  <% end %>
+                <div class="inactive" id="more-info">
+                    <p>
+                      <%= dog.bio %>
+                      <span id="more-link">less</span>
+                    </p>
                     <ul>
                       <li><strong>Breed: </strong> <%= dog.breed %> </li>
                       <li><strong>Age: </strong> <%= dog.age %></li>
@@ -58,9 +67,13 @@
         <% end %>
       </div>
     </div>
-    <div class="ui segment" id = "map-container">
-      <h3 class="ui dividing header center aligned">Parks between you and <%= @user.first_name %></h3>
-      <div id="mapbox_map"></div>
-    </div>
+     <div class="ui segment" id = "map-container">
+       <h3 class="ui dividing header">Dog parks between you and <%= @user.first_name %></h3>
+       <div id="mapbox_map" data-userlatitude=<%= current_user.latitude %> data-userlongitude=<%= current_user.longitude %> data-otherlatitude=<%= @user.latitude %> data-otherlongitude=<%= @user.longitude %>>
+         <div class="ui active inverted dimmer" >
+          <div class="ui text loader">Loading</div>
+        </div>
+       </div>
+     </div>
   </div>
 </div>
