@@ -51,7 +51,6 @@ gem 'dotenv-rails'
 gem 'rest-client'
 gem 'proxylocal', '~> 0.3.1'
 
-
 # Use unicorn as the app server
 # gem 'unicorn'
 
