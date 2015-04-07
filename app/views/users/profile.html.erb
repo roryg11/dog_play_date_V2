@@ -55,105 +55,102 @@
   </div>
   <div class="eleven wide column">
     <div class="ui segment">
-      <div class="ui segment">
-        <h3 class="ui header center aligned">Our Playmate Picks for You</h3>
-        <div class="ui three column stackable grid">
-            <% @dogs[0..2].each do |dog| %>
-              <div class="column">
-                <div class="ui fluid card">
-                  <div class="image dimmable">
-                    <%= image_tag(dog.avatar_url) %>
-                  </div>
-                  <div class="content info dog" data-dog-id="<%= dog.id %>">
-                    <div class="header"><%= dog.name %></div>
-                    <div class="meta">
-                      Adoring Human: <%= link_to dog.user.user_name, user_path(dog.user), class: "group" %>
-                    </div>
-                    <div class="description" data-dog-id=<%="#{dog.id}"%>>
-                      <% if dog.bio.length > 100 %>
-                        <p class="bio"><%= dog.bio[0..100] %>...<span id="more-link">more</span></p>
-                      <% else %>
-                        <p class="bio"><%= dog.bio %>...<span id="more-link">more</span></p>
-                      <% end %>
-                      <div class="inactive" id="more-info">
-                        <p>
-                          <%= dog.bio %>
-                          <span id="more-link">less</span>
-                        </p>
-                        <ul>
-                          <li><strong>Breed: </strong> <%= dog.breed %> </li>
-                          <li><strong>Age: </strong> <%= dog.age %></li>
-                          <li><strong>Gender: </strong><%= dog.gender %></li>
-                          <li><strong>Size: </strong><%= dog.size %></li>
-                          <li><strong>Play: </strong><%= dog.play %></li>
-                          <li><strong>Personality: </strong><%= dog.personality %></li>
-                        </ul>
-                      </div>
-                    </div>
-
-                  </div>
-                  <div class="extra content">
-                    <div class="ui avatar image">
-                      <%= image_tag(dog.user.avatar_url) %>
-                    </div>
-                    <% if current_user %>
-                    <%= dog.user.user_name  %> | <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: dog.user.id), method: 'post'%>
-                    <% end %>
+      <h3 class="ui header center aligned">Our Playmate Picks for You</h3>
+      <div class="ui three column stackable grid">
+        <% @dogs[0..2].each do |dog| %>
+          <div class="column">
+            <div class="ui fluid card">
+              <div class="image dimmable">
+                <%= image_tag(dog.avatar_url) %>
+              </div>
+              <div class="content info dog" data-dog-id="<%= dog.id %>">
+                <div class="header"><%= dog.name %></div>
+                <div class="meta">
+                  Adoring Human: <%= link_to dog.user.user_name, user_path(dog.user), class: "group" %>
+                </div>
+                <div class="description" data-dog-id=<%="#{dog.id}"%>>
+                  <% if dog.bio.length > 100 %>
+                    <p class="bio"><%= dog.bio[0..100] %>...<span id="more-link">more</span></p>
+                  <% else %>
+                    <p class="bio"><%= dog.bio %>...<span id="more-link">more</span></p>
+                  <% end %>
+                  <div class="inactive" id="more-info">
+                    <p>
+                      <%= dog.bio %>
+                      <span id="more-link">less</span>
+                    </p>
+                    <ul>
+                      <li><strong>Breed: </strong> <%= dog.breed %> </li>
+                      <li><strong>Age: </strong> <%= dog.age %></li>
+                      <li><strong>Gender: </strong><%= dog.gender %></li>
+                      <li><strong>Size: </strong><%= dog.size %></li>
+                      <li><strong>Play: </strong><%= dog.play %></li>
+                      <li><strong>Personality: </strong><%= dog.personality %></li>
+                    </ul>
                   </div>
                 </div>
               </div>
-            <% end %>
-        </div>
-        <h4>Dog Preferences</h4>
-        <div class="ui segment">
-          <table class="ui table">
-            <thead>
-              <tr>
-                <th>Preferences</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @filters.each do |filter| %>
-              <tr>
-                <% if filter.id != nil %>
-                  <% if filter.type == "Zipcode" %>
-                    <td>Based on <%= filter.type %>: <%= current_user.zipcode %></td>
-                    <td></td>
-                  <% elsif filter.type == "BlockedUser" %>
-                  <% else %>
-                    <td><%= filter.type %> Preference: <%= filter.content %></td>
-                  <% end %>
+              <div class="extra content">
+                <div class="ui avatar image">
+                  <%= image_tag(dog.user.avatar_url) %>
+                </div>
+                <% if current_user %>
+                <%= dog.user.user_name  %> | <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: dog.user.id), method: 'post'%>
                 <% end %>
-              </tr>
-              <% end %>
-            </tbody>
-          </table>
-          <h4>Blocked Users</h4>
-          <table class="ui table">
-            <thead>
-              <tr>
-                <th>
-                  Usernames
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <% if current_user.blocked_users_info %>
-                  <tr>
-                    <td>Blocked Users:
-                      <% current_user.blocked_users_info.each do |blocked_hash| %>
-                        <%= "#{(blocked_hash[:user]).user_name}, "%>
-                      <% end %>
-                    </td>
-                  </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-        <%= link_to "Change Preferences", preferences_path, id:"preferences-link", class: "ui button primary-green-button" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
       </div>
+      <h4>Dog Preferences</h4>
+      <div class="ui segment">
+        <table class="ui table">
+          <thead>
+            <tr>
+              <th>Preferences</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @filters.each do |filter| %>
+            <tr>
+              <% if filter.id != nil %>
+                <% if filter.type == "Zipcode" %>
+                  <td>Based on <%= filter.type %>: <%= current_user.zipcode %></td>
+                  <td></td>
+                <% elsif filter.type == "BlockedUser" %>
+                <% else %>
+                  <td><%= filter.type %> Preference: <%= filter.content %></td>
+                <% end %>
+              <% end %>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <h4>Blocked Users</h4>
+        <table class="ui table">
+          <thead>
+            <tr>
+              <th>
+                Usernames
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if current_user.blocked_users_info %>
+                <tr>
+                  <td>Blocked Users:
+                    <% current_user.blocked_users_info.each do |blocked_hash| %>
+                      <%= "#{(blocked_hash[:user]).user_name}, "%>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <%= link_to "Change Preferences", preferences_path, id:"preferences-link", class: "ui button primary-green-button" %>
     </div>
     <div class="ui segment">
       <a class="ui ribbon label">Conversations</a>
@@ -185,9 +182,9 @@
                   <% end %>
                 </div>
                   <% if conversation.messages.last.body.length > 40 %>
-                  <div class="description"> <%= conversation.messages.last.body[0..40] %>... </div>
+                    <div class="description"> <%= conversation.messages.last.body[0..40] %>... </div>
                   <% else %>
-                  <div class="description"> <%= conversation.messages.last.body %> </div>
+                    <div class="description"> <%= conversation.messages.last.body %> </div>
                   <% end %>
                 <% end %>
               </div>
