@@ -1,10 +1,10 @@
 require 'pry'
 class User < ActiveRecord::Base
   has_secure_password
-  has_many :dogs
-  has_many :conversations, :foreign_key => :sender_id
-  has_many :conversations, :foreign_key => :recipient_id
-  has_many :filters
+  has_many :dogs, :dependent => :destroy
+  has_many :conversations, :foreign_key => :sender_id, :dependent => :destroy
+  has_many :conversations, :foreign_key => :recipient_id, :dependent => :destroy
+  has_many :filters, :dependent => :destroy
 
   delegate :breeds, :sizes, :ages, :personalities, :plays, :blocked_users, :genders, :zipcodes, to: :filters
   mount_uploader :avatar, AvatarUploader, :default_user_url => "/images/fallback/missinguser.jpg"

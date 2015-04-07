@@ -10,6 +10,7 @@
   </div>
 
   <div class="ui form segment">
+    <h3 class="ui header"> <%= image_tag current_user.avatar, class:"ui avatar image"%>Hey, <%= current_user.first_name %>! Sign up your dog here</h3>
     <%= form_for @dog do |f| %>
     <div class="three fields">
       <div class="field">

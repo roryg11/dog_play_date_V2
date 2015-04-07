@@ -5,10 +5,12 @@ class UsersController < ApplicationController
     user = current_user
     @conversations = user.conversations_user_can_see
     @dogs = user.dogs_user_can_see
+    if user.filters
     @filters = user.filters
-    if @dogs
-      @filters.each do |filter|
-        @dogs = filter.filter(@dogs)
+      if @dogs
+        @filters.each do |filter|
+          @dogs = filter.filter(@dogs)
+        end
       end
     end
     if @dogs
@@ -31,7 +33,10 @@ class UsersController < ApplicationController
       @user.latitude = json["results"][0]["geometry"]["location"]["lat"]
       @user.longitude = json["results"][0]["geometry"]["location"]["lng"]
       @user.save
-      @user.filters.where({type: "Zipcode"}).destroy
+      if @user.zipcodes
+        zip_filter = @user.zipcodes.first
+        zip_filter.destroy
+      end
       filter = @user.filters.new({type:"Zipcode", content: "#{@user.latitude}, #{@user.longitude}"})
       filter.save
     else
