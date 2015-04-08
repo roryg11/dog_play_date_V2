@@ -6,6 +6,7 @@ class DogsController < ApplicationController
   end
 
   def index
+    @show_all_dogs = false
     @dogs = current_user.dogs_user_can_see
     if current_user
       zip_filter = current_user.filters.where(:type=> "Zipcode")[0]
@@ -13,6 +14,7 @@ class DogsController < ApplicationController
       @dogs = @dogs.where.not(user_id: current_user.id)
       if !params[:dogs].blank?
         @dogs = current_user.dogs_user_can_see
+        @show_all_dogs = true
       end
     end
     if !params[:g].blank?
